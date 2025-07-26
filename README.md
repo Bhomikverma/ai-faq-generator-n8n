@@ -1,95 +1,96 @@
 # ai-faq-generator-n8n
-AI-Powered FAQ Generator using n8n, LLM Agent, Pinecone, and HuggingFace — detects repeated queries and auto-generates FAQs to update your knowledge base.
+# 🤖 AI FAQ Generator with n8n
 
-This project showcases an AI automation workflow built with n8n that monitors incoming support queries, detects frequently asked ones (≥ 3 times in the last 14 days), and auto-generates clean FAQs using LLMs, RAG, and vector similarity search.
+**AI-Powered FAQ Generator** using **n8n**, **LLM Agents**, **Pinecone**, and **HuggingFace** — detects repeated queries and auto-generates FAQs to dynamically update your knowledge base.
 
-📺 Watch the Demo Video:(#)
+---
 
-🧠 How the Workflow Works
-1. Trigger and Query Logging
-Triggered via Parent Workflow when a new query is received
+## 📽️ Demo Video  
+[Click to view](https://www.loom.com/share/6fd33222db7a4ea6aca4f72ba1b142a0?sid=3e3b8d52-2df7-4e12-84de-f64932851b32)(#)
 
-Query is logged and passed to Child Workflow for further processing
+---
 
-2. Frequency & Similarity Check
-Counts how many times the query has been asked in the last 14 days
+## 🧠 How the Workflow Works
 
-If asked ≥ 3 times:
+### 🔹 1. Trigger & Query Logging
+- Triggered via **Parent Workflow** when a new query is received  
+- Query is logged and passed to **Child Workflow** for processing
 
-It checks if a similar FAQ already exists using HuggingFace Embeddings
+### 🔹 2. Frequency & Similarity Check
+- Counts how many times the query was asked in the **last 14 days**
+- If **≥ 3 times**:
+  - Runs **semantic similarity** check via **HuggingFace**
+  - Prevents duplication by checking existing FAQs
 
-Prevents duplication of similar FAQs
+### 🔹 3. FAQ Generation
+- AI Agent (via **OpenAI API**) generates concise answers  
+- Uses **RAG** (via **Pinecone**) to fetch relevant context chunks  
+- Structures the final response as an FAQ
 
-3. FAQ Generation
-An AI Agent (using OpenAI API) generates a clean, concise answer
+### 🔹 4. Database Update
+- Pushes new FAQ + embeddings to **Pinecone**  
+- Logs the result into a **Google Sheets FAQ Database**
 
-RAG (via Pinecone) is used to fetch relevant context chunks
+---
 
-The final response is structured as an FAQ
+## 🧠🔍 Workflow Logic: AI Agent + RAG
 
-4. Database Update
-The newly generated FAQ and its embedding are:
+- Query sent to **Child Workflow**
+- Embedded with **HuggingFace**
+- Vector similarity search done via **Pinecone**
+- AI Agent uses:
+  - System Prompt  
+  - Retrieved Vector Context  
+  - Live Query Input  
+- Final Answer: via **OpenAI Chat Model**
+- Outputs:
+  - Updated Vector DB  
+  - Google Sheets Row
 
-Pushed to Pinecone for future semantic search
+---
 
-Logged into a Google Sheet FAQ database
+## ✅ Features
+- Fully **automated**
+- **Modular** with Parent-Child Workflow structure
 
-🔷 Workflow Logic: AI Agent + RAG System
-Incoming queries are passed to a Child Workflow
+---
 
-Query is embedded using HuggingFace + Pinecone for vector lookup
+## 🔧 Tech Stack
 
-AI Agent uses:
+| Tool               | Purpose                                      |
+|--------------------|----------------------------------------------|
+| `n8n`              | Low-code workflow orchestration              |
+| `OpenAI API`       | LLM-powered answer generation                |
+| `HuggingFace`      | Embedding for semantic similarity            |
+| `Pinecone`         | Vector DB for retrieval-augmented generation |
+| `Google Sheets API`| FAQ logging                                  |
+| `JavaScript`       | Custom business logic in n8n nodes           |
 
-System prompt
+---
 
-Retrieved vector context
+## 📁 Project Structure
 
-Live query input
+| Node/Module       | Purpose                                   |
+|-------------------|-------------------------------------------|
+| Parent Workflow   | Logs & forwards queries                   |
+| Child Workflow    | Core logic: frequency + FAQ generation    |
+| Embedding (HF)    | Vectorizes queries and FAQs               |
+| Pinecone          | Stores & searches semantic vectors        |
+| OpenAI Agent      | Generates human-like answers              |
+| Google Sheets     | Stores final FAQs                         |
+| JS Nodes          | Business logic scripting                  |
 
-Final answer is generated using OpenAI chat model
+---
 
-Updates both vector DB and Google Sheet
+## 🚀 Use Cases
+- 🏫 Student housing / university helpdesk  
+- 🛠️ Customer service chat automation  
+- 📚 Auto-documentation for recurring queries  
+- 🧠 Internal knowledge base automation
 
-✅ Fully automated
-🔄 Modular logic using Parent-Child workflows
+---
 
-🔧 Tech Stack
-n8n (Low-code automation)
+## 💬 Author
+Built by **Bhomik Verma** 
 
-OpenAI API (LLM-powered response generation)
 
-HuggingFace Embeddings (Semantic similarity)
-
-Pinecone (Vector database for RAG)
-
-Google Sheets API (FAQ storage)
-
-JavaScript (Custom logic in n8n nodes)
-
-📁 Project Structure
-Node/Module	Purpose
-Parent Workflow	Logs and forwards queries
-Child Workflow	Core logic: check frequency & generate FAQ
-Embedding (HF)	Generates vector for query and FAQs
-Pinecone	Stores and searches similar vectors
-OpenAI Agent	Generates answer with optional context
-Google Sheets	Stores final FAQ entries
-JS Nodes	Custom business logic
-
-🚀 Use Cases
-Student housing or university support
-
-Customer service chat automation
-
-Auto-documentation for incoming queries
-
-Internal knowledge base generation
-
-📹 Demo
-🔗 Click here to watch the full workflow demo:(#)
-
-💬 Author
-Built by Bhomik Verma — an AI workflow builder automating support and knowledge systems using no-code + LLMs.
-
-Feel free to connect or collaborate!
