@@ -6,7 +6,7 @@
 ---
 
 ## 📽️ Demo Video  
-[Click to view]([https://www.loom.com/share/6fd33222db7a4ea6aca4f72ba1b142a0?sid=3e3b8d52-2df7-4e12-84de-f64932851b32](https://www.loom.com/share/bfbeab6c7ae246999759173506fcd6d3?sid=adf8471b-ba83-4a6d-9b38-f6cf5ab1f03b))(#)
+[Click to view]([https://www.loom.com/share/bfbeab6c7ae246999759173506fcd6d3?sid=adf8471b-ba83-4a6d-9b38-f6cf5ab1f03b])(#)
 
 ---
 
